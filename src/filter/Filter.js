@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Filter.module.css";
+import { connect } from "react-redux";
 
 const Filter = ({ getFilterValue, filter }) => {
   return (
@@ -18,4 +19,4 @@ const Filter = ({ getFilterValue, filter }) => {
   );
 };
 
-export default Filter;
+export default connect(null)(Filter);

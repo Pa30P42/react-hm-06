@@ -1,6 +1,7 @@
 /* TYPES */
 export const ADDCONTACT = "contact/ADD";
 export const DELETECONTACT = "contact/DEL";
+export const FILTERVALUE = "contact/FV";
 
 /* ACTIONS */
 const onAddContact = (contact) => {
@@ -16,4 +17,11 @@ const onDeleteContact = (id) => {
   };
 };
 
-export default { onAddContact, onDeleteContact };
+const filterValue = (e) => {
+  return {
+    type: FILTERVALUE,
+    payload: { filter: e.target.value },
+  };
+};
+
+export default { onAddContact, onDeleteContact, filterValue };
