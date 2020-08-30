@@ -19,6 +19,7 @@ class Contacts extends Component {
               <ContactItem
                 deleteContact={this.props.deleteContact}
                 key={contact.id}
+                id={contact.id}
                 contact={contact}
               />
             </CSSTransition>

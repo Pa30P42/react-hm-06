@@ -1,25 +1,32 @@
 import React from "react";
 import styles from "./ContactItem.module.css";
-// import { CSSTransition } from "react-transition-group";
+import { connect } from "react-redux";
+import actions from "../redux/actions";
 
-const ContactItem = ({ contact, deleteContact }) => {
+const ContactItem = ({ contact, deleteContact, id }) => {
   return (
-    // <CSSTransition
-    //   key={contact.id}
-    //   timeout={500}
-    //   classNames={styles}
-    //   unmountOnExit
-    // >
     <li className={styles.contactItem}>
       <p>
         {contact.name}: {contact.number}
       </p>
-      <button type="button" onClick={() => deleteContact(contact.id)}>
+      <button type="button" onClick={() => deleteContact(id)}>
         Delete
       </button>
     </li>
-    // </CSSTransition>
   );
 };
 
-export default ContactItem;
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  deleteContact: () => dispatch(actions.onDeleteContact(ownProps.id)),
+});
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+  console.log("Own Props", ownProps);
+  const item = state.contacts.items.find((item) => item.id === ownProps.id);
+  console.log(item);
+  return {
+    ...item,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactItem);

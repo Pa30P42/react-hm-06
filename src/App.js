@@ -48,11 +48,7 @@ class App extends Component {
             </CSSTransition>
           )}
         </TransitionGroup>
-        <Form
-          // alertSwitch={this.alertSwitch}
-          // alert={alert}
-          addContact={this.props.addContact}
-        />
+        <Form addContact={this.props.addContact} />
         <h2 className={styles.phonebookTitle}>Contacts</h2>
         <Filter
           filter={this.props.filter}
