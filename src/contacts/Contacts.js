@@ -5,11 +5,18 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 
 class Contacts extends Component {
+  getFilteredContacs = () => {
+    return this.props.filter
+      ? this.props.contacts.filter((contact) =>
+          contact.name.toLowerCase().includes(this.props.filter.toLowerCase())
+        )
+      : this.props.contacts;
+  };
   render() {
     return (
       <>
         <TransitionGroup className={styles.contacts}>
-          {this.props.contacts.map((contact) => (
+          {this.getFilteredContacs().map((contact) => (
             <CSSTransition
               key={contact.id}
               timeout={1000}
@@ -32,6 +39,7 @@ class Contacts extends Component {
 const mapStateToProps = (state) => {
   return {
     contacts: state.contacts,
+    filter: state.filter,
   };
 };
 

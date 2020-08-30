@@ -2,6 +2,7 @@
 export const ADDCONTACT = "contact/ADD";
 export const DELETECONTACT = "contact/DEL";
 export const FILTERVALUE = "contact/FV";
+export const GETFILTERVALUE = "contact/GETFV";
 
 /* ACTIONS */
 const onAddContact = (contact) => {
@@ -23,5 +24,12 @@ const filterValue = (e) => {
     payload: { filter: e.target.value },
   };
 };
+
+// const getFilterData = () => {
+//   return {
+//     type: GETFILTERVALUE,
+//     // payload: { filter: e.target.value },
+//   };
+// };
 
 export default { onAddContact, onDeleteContact, filterValue };

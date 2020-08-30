@@ -25,15 +25,30 @@ class App extends Component {
 
   getFilterValue = (e) => {
     this.props.filterValue(e);
+    if (this.props.filter) {
+      return this.props.contacts.filter((contact) =>
+        contact.name.toLowerCase().includes(this.props.filter.toLowerCase())
+      );
+    } else {
+      return this.props.contacts;
+    }
+    // this.props.getFilterValue();
+    // return this.props.filter
+    //   ? this.props.contacts.filter((contact) =>
+    //       contact.name.toLowerCase().includes(this.props.filter.toLowerCase())
+    //     )
+    //   : this.props.contacts;
+    // you can't mutate you shoul use dispatch
   };
 
-  // getFilteredData = () => {
-  //   return this.state.filter
-  //     ? this.state.contacts.filter((contact) =>
-  //         contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
-  //       )
-  //     : this.state.contacts;
-  // };
+  getFilteredData = () => {
+    console.log(this.props);
+    // return this.props.filter
+    //   ? this.props.contacts.filter((contact) =>
+    //       contact.name.toLowerCase().includes(this.props.filter.toLowerCase())
+    //     )
+    //   : this.props.contacts;
+  };
 
   // addContact = (contact) => {
   //   this.props.addContact(contact);
@@ -97,6 +112,7 @@ const mapDispatchToProps = (dispatch) => {
     addContact: (contact) => dispatch(contactActions.onAddContact(contact)),
     deleteContact: (id) => dispatch(contactActions.onDeleteContact(id)),
     filterValue: (e) => dispatch(contactActions.filterValue(e)),
+    getFilterValue: () => dispatch(contactActions.getFilterValue()),
   };
 };
 
