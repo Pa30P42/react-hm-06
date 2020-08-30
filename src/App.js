@@ -14,48 +14,16 @@ import { connect } from "react-redux";
 import contactActions from "./redux/actions";
 
 class App extends Component {
-  state = {
-    // filter: "",
-    alert: false,
-  };
-
-  alertSwitch = () => {
-    this.setState((prevState) => ({ alert: !prevState.alert }));
-  };
-
-  getFilterValue = (e) => {
-    this.props.filterValue(e);
-    if (this.props.filter) {
-      return this.props.contacts.filter((contact) =>
-        contact.name.toLowerCase().includes(this.props.filter.toLowerCase())
-      );
-    } else {
-      return this.props.contacts;
-    }
-    // this.props.getFilterValue();
-    // return this.props.filter
-    //   ? this.props.contacts.filter((contact) =>
-    //       contact.name.toLowerCase().includes(this.props.filter.toLowerCase())
-    //     )
-    //   : this.props.contacts;
-    // you can't mutate you shoul use dispatch
-  };
-
-  getFilteredData = () => {
-    console.log(this.props);
-    // return this.props.filter
-    //   ? this.props.contacts.filter((contact) =>
-    //       contact.name.toLowerCase().includes(this.props.filter.toLowerCase())
-    //     )
-    //   : this.props.contacts;
-  };
-
-  // addContact = (contact) => {
-  //   this.props.addContact(contact);
+  // state = {
+  //   alert: false,
   // };
 
+  alertSwitch = () => {
+    this.props.switchAlert();
+  };
+
   render() {
-    const { contacts, filter, alert } = this.state;
+    const { alert } = this.props.contacts;
     return (
       <>
         <TransitionGroup className={styles.titleWrapper}>
@@ -81,9 +49,8 @@ class App extends Component {
           )}
         </TransitionGroup>
         <Form
-          alertSwitch={this.alertSwitch}
-          alert={alert}
-          contacts={contacts}
+          // alertSwitch={this.alertSwitch}
+          // alert={alert}
           addContact={this.props.addContact}
         />
         <h2 className={styles.phonebookTitle}>Contacts</h2>
@@ -104,6 +71,7 @@ const mapStateToProps = (state) => {
   return {
     contacts: state.contacts,
     filter: state.filter,
+    alert: state.alert,
   };
 };
 
@@ -113,6 +81,7 @@ const mapDispatchToProps = (dispatch) => {
     deleteContact: (id) => dispatch(contactActions.onDeleteContact(id)),
     filterValue: (e) => dispatch(contactActions.filterValue(e)),
     getFilterValue: () => dispatch(contactActions.getFilterValue()),
+    switchAlert: () => dispatch(contactActions.switchAlert()),
   };
 };
 

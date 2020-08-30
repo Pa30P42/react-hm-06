@@ -3,6 +3,7 @@ export const ADDCONTACT = "contact/ADD";
 export const DELETECONTACT = "contact/DEL";
 export const FILTERVALUE = "contact/FV";
 export const GETFILTERVALUE = "contact/GETFV";
+export const ALERTHANDLER = "contact/ALERT";
 
 /* ACTIONS */
 const onAddContact = (contact) => {
@@ -25,6 +26,12 @@ const filterValue = (e) => {
   };
 };
 
+const switchAlert = () => {
+  return {
+    type: ALERTHANDLER,
+  };
+};
+
 // const getFilterData = () => {
 //   return {
 //     type: GETFILTERVALUE,
@@ -32,4 +39,4 @@ const filterValue = (e) => {
 //   };
 // };
 
-export default { onAddContact, onDeleteContact, filterValue };
+export default { onAddContact, onDeleteContact, filterValue, switchAlert };

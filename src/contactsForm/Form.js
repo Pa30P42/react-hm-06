@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./Form.module.css";
 import { connect } from "react-redux";
+import contactActions from "../redux/actions";
 
 class Form extends Component {
   state = {
@@ -18,19 +19,16 @@ class Form extends Component {
 
   handeleSubmit = (e) => {
     e.preventDefault();
-    this.props.addContact({
-      name: this.state.name,
-      number: this.state.number,
-      id: uuidv4(),
-    });
-    // const wrongContact = this.props.contacts.map((contact) => contact.name);
-    // wrongContact.find((item) => item === this.state.name)
-    //   ? this.props.alertSwitch()
-    //   : this.props.addContact({
-    //       name: this.state.name,
-    //       number: this.state.number,
-    //       id: uuidv4(),
-    //     });
+    const wrongContact = this.props.contacts.items.map(
+      (contact) => contact.name
+    );
+    wrongContact.find((item) => item === this.state.name)
+      ? this.props.switchAlert()
+      : this.props.addContact({
+          name: this.state.name,
+          number: this.state.number,
+          id: uuidv4(),
+        });
     this.setState({ name: "" });
     this.setState({ number: "" });
   };
@@ -68,4 +66,17 @@ class Form extends Component {
   }
 }
 
-export default connect(null)(Form);
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.contacts,
+    // filter: state.filter,
+    alert: state.alert,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    switchAlert: () => dispatch(contactActions.switchAlert()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

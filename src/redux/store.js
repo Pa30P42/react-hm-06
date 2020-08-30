@@ -1,12 +1,8 @@
 import { createStore, combineReducers } from "redux";
 import contactsReducer from "./contactsReducer";
-import filterReducer from "./filterReducer";
-
-// const reducer = (state = {}, action) => state;
 
 const rootReducer = combineReducers({
   contacts: contactsReducer,
-  filter: filterReducer,
 });
 const store = createStore(
   rootReducer,
