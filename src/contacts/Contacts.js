@@ -16,12 +16,7 @@ class Contacts extends Component {
               classNames={styles}
               unmountOnExit
             >
-              <ContactItem
-                deleteContact={this.props.deleteContact}
-                key={contact.id}
-                id={contact.id}
-                contact={contact}
-              />
+              <ContactItem key={contact.id} id={contact.id} contact={contact} />
             </CSSTransition>
           ))}
         </TransitionGroup>

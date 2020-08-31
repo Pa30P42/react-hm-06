@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-// import Feedback from "./components/feedbacks/feedbacks";
-// import TotalFeedback from "./components/totalFeedback/TotalFeedback";
-// import RefactoredFeedback from "./components/RefactoredFeedback/RefactoredFeedback";
-// import Notification from "./components/notification/notification";
 import Form from "./contactsForm/Form";
 import Contacts from "./contacts/Contacts";
 import Filter from "./filter/Filter";
@@ -20,9 +16,6 @@ class App extends Component {
       JSON.parse(persistedContacts).map((contact) =>
         this.props.addContact(contact)
       );
-      // this.setState({
-      //   contacts: JSON.parse(persistedContacts),
-      // });
     }
   }
 
@@ -67,14 +60,8 @@ class App extends Component {
         </TransitionGroup>
         <Form addContact={this.props.addContact} />
         <h2 className={styles.phonebookTitle}>Contacts</h2>
-        <Filter
-          filter={this.props.filter}
-          getFilterValue={this.getFilterValue}
-        />
-        <Contacts
-          deleteContact={this.props.deleteContact}
-          contacts={this.props.contacts}
-        />
+        <Filter />
+        <Contacts contacts={this.props.contacts} />
       </>
     );
   }
@@ -83,7 +70,6 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     contacts: state.contacts,
-    filter: state.filter,
     alert: state.alert,
   };
 };
@@ -91,9 +77,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addContact: (contact) => dispatch(contactActions.onAddContact(contact)),
-    deleteContact: (id) => dispatch(contactActions.onDeleteContact(id)),
-    filterValue: (e) => dispatch(contactActions.filterValue(e)),
-    getFilterValue: () => dispatch(contactActions.getFilterValue()),
     switchAlert: () => dispatch(contactActions.switchAlert()),
   };
 };

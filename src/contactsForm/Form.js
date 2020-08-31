@@ -69,7 +69,6 @@ class Form extends Component {
 const mapStateToProps = (state) => {
   return {
     contacts: state.contacts,
-    // filter: state.filter,
     alert: state.alert,
   };
 };
