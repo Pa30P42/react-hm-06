@@ -14,9 +14,26 @@ import { connect } from "react-redux";
 import contactActions from "./redux/actions";
 
 class App extends Component {
-  // state = {
-  //   alert: false,
-  // };
+  componentDidMount() {
+    const persistedContacts = localStorage.getItem("contacts");
+    if (persistedContacts) {
+      JSON.parse(persistedContacts).map((contact) =>
+        this.props.addContact(contact)
+      );
+      // this.setState({
+      //   contacts: JSON.parse(persistedContacts),
+      // });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.contacts.items !== this.props.contacts.items) {
+      localStorage.setItem(
+        "contacts",
+        JSON.stringify(this.props.contacts.items)
+      );
+    }
+  }
 
   alertSwitch = () => {
     this.props.switchAlert();

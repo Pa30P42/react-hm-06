@@ -20,10 +20,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   deleteContact: () => dispatch(actions.onDeleteContact(ownProps.id)),
 });
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
-  console.log("Own Props", ownProps);
   const item = state.contacts.items.find((item) => item.id === ownProps.id);
-  console.log(item);
   return {
     ...item,
   };
